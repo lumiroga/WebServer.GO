@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -59,4 +60,9 @@ func main() {
 			t, t1,
 		},
 	}
+
+	for i := 0; i < len(list.tasks); i++ {
+		fmt.Print(list.tasks[i].name + "\n")
+	}
+
 }
