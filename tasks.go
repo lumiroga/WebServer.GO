@@ -5,9 +5,12 @@ import (
 	"time"
 )
 
-func (tL *taskList) agregarALista(t *task) {
+func (tL *taskList) addToList(t *task) {
 
 	tL.tasks = append(tL.tasks, t)
+}
+func (tL *taskList) removeTask(index int) {
+	tL.tasks = append(tL.tasks[:index], tL.tasks[index+1:]...) //Error sin los elipsis
 }
 
 type task struct {
@@ -57,12 +60,15 @@ func main() {
 
 	list := taskList{
 		tasks: []*task{
-			t, t1,
+			t, t1, t2, t3,
 		},
 	}
 
+	list.addToList(&task{name: "Nueva tarea"})
+
 	for i := 0; i < len(list.tasks); i++ {
-		fmt.Print(list.tasks[i].name + "\n")
+		fmt.Print(list.tasks[i])
+
 	}
 
 }
