@@ -17,8 +17,13 @@ func NewServer(port string) *Server {
 }
 
 //Handle maps a path to correct handler
-func (serv *Server) Handle(path string, handler http.HandlerFunc) {
-	serv.router.rules[path] = handler
+func (serv *Server) Handle(method string, path string, handler http.HandlerFunc) {
+	_, exist := serv.router.rules[path]
+
+	if !exist {
+		serv.router.rules[path] = make(map[string]http.HandlerFunc)
+	}
+	serv.router.rules[path][method] = handler
 }
 
 //AddMiddleware - adds middlewares in the path
